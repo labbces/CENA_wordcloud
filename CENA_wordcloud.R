@@ -23,12 +23,53 @@ for (r in unique(c(researchersBiol,researchersNucl,researchersQuim))){
   
 }
 
-abstractsCENAPPG=getAbstracts(unique(pmidsCENAPPG))
-cleanAbsCENAPPG=cleanAbstracts(abstractsCENAPPG)
+pmidsCENAPPGBiol=c()
+for (r in researchersBiol){
+  print(r)
+  pmids=getPMIDs(author=r,dFrom=2019,dTo=2023,n=1000)
+  pmidsCENAPPGBiol=append(pmidsCENAPPGBiol,pmids)
+}
+  
 
+pmidsCENAPPGNucl=c()
+for (r in researchersNucl){
+  print(r)
+  pmids=getPMIDs(author=r,dFrom=2019,dTo=2023,n=1000)
+  pmidsCENAPPGNucl=append(pmidsCENAPPGNucl,pmids)
+}
+
+pmidsCENAPPGQuim=c()
+for (r in researchersQuim){
+  print(r)
+  pmids=getPMIDs(author=r,dFrom=2019,dTo=2023,n=1000)
+  pmidsCENAPPGBQuim=append(pmidsCENAPPGQuim,pmids)
+}
+
+abstractsCENAPPG=getAbstracts(unique(pmidsCENAPPG))
+abstractsCENAPPGBiol=getAbstracts(unique(pmidsCENAPPGBiol))
+abstractsCENAPPGNucl=getAbstracts(unique(pmidsCENAPPGNucl))
+abstractsCENAPPGQuim=getAbstracts(unique(pmidsCENAPPGQuim))
+
+cleanAbsCENAPPG=cleanAbstracts(abstractsCENAPPG)
+cleanAbsCENAPPGBiol=cleanAbstracts(abstractsCENAPPGBiol)
+cleanAbsCENAPPGNucl=cleanAbstracts(abstractsCENAPPGNucl)
+cleanAbsCENAPPGQuim=cleanAbstracts(abstractsCENAPPGQuim)
+
+write.csv(x = cleanAbsCENAPPG, file = "cleanAbsCENAPPG.freq.csv", row.names = FALSE)
 pdf(file = "wordCloudCENAPPG.pdf")
 plotWordCloud(cleanAbsCENAPPG,min.freq = 2, scale = c(2, 0.3))
 dev.off()
 
+pdf(file = "wordCloudCENAPPGBiol.pdf")
+plotWordCloud(cleanAbsCENAPPGBiol,min.freq = 2, scale = c(2, 0.3))
+dev.off()
+
+pdf(file = "wordCloudCENAPPGNucl.pdf")
+plotWordCloud(cleanAbsCENAPPG,min.freq = 2, scale = c(2, 0.3))
+dev.off()
+
+pdf(file = "wordCloudCENAPPGQuim.pdf")
+plotWordCloud(cleanAbsCENAPPG,min.freq = 2, scale = c(2, 0.3))
+dev.off()
 
 getPMIDs(author="Reis Boaventura",dFrom=2019,dTo=2023,n=1000)
