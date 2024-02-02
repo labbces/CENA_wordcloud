@@ -59,6 +59,6 @@ wc.generate_from_frequencies(wordsfreq)
 ##DMRP 
 plt.imshow(wc, interpolation="bilinear")
 plt.axis("off")
-plt.show()
-##DMRP plt.savefig("cleanAbsCENAPPG.freq.png",dpi=600,format='png')
+#plt.show()
+plt.savefig("cleanAbsCENAPPG.freq.png",dpi=600,format='png')
 ##DMRP #print(wordsfreq)
